@@ -1,5 +1,6 @@
 import 'package:Kusrc_table/widget/navigation_drawer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:Kusrc_table/firebase_options.dart';
 
 class RegistertimePage extends StatelessWidget {
   @override
