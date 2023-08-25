@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:Kusrc_table/model/navigation_item.dart';
 import 'package:Kusrc_table/page/management_page.dart';
 import 'package:Kusrc_table/page/register_time_page.dart';
@@ -27,7 +29,7 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   static final String title = 'Navigation Drawer';
-  final auth = FirebaseAuth.instance;
+  
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => NavigationProvider(),
@@ -52,7 +54,21 @@ class _MainPageState extends State<MainPage> {
   Widget buildPages() {
     final provider = Provider.of<NavigationProvider>(context);
     final navigationItem = provider.navigationItem;
-    return Container(Container(child: Text(auth.currentUser)))
+    final auth = FirebaseFirestore.instance;
+    return StreamBuilder(
+      stream: auth.collection("บุคลากร").snapshots(), 
+      builder: (context, snapshot){
+        return ListView(
+          /*scrollDirection: Axis.vertical,
+          itemCount: snapshot.data.docs,*/
+          children: snapshot.data?.docs.map((doc){
+            return Container(
+              child: Center(child: Text(doc['Rank'])),
+            );
+          }),
+        );
+      },
+      );
     /*switch (navigationItem) {
       // case NavigationItem.header:
       //   return HeaderPage();
