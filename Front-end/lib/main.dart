@@ -3,9 +3,12 @@ import 'package:Kusrc_table/page/management_page.dart';
 import 'package:Kusrc_table/page/register_time_page.dart';
 import 'package:Kusrc_table/page/timetable_page.dart';
 import 'package:Kusrc_table/provider/navigation_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:Kusrc_table/firebase_options.dart';
+import 'package:Kusrc_table/data/user.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +16,10 @@ Future main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await fetchData();
 
   runApp(MyApp());
 }
