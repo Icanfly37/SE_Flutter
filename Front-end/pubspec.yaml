@@ -8,13 +8,15 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^2.15.1
-  cloud_firestore: ^4.8.5
+  cloud_firestore: ^4.9.0
 
   cupertino_icons: ^1.0.2
 
   provider: ^6.0.5
   unicons: ^2.1.1
   font_awesome_flutter: ^10.4.0
+  firebase_auth: ^4.8.0
+  firebase_storage: ^11.2.6
 
 dev_dependencies:
   flutter_test:

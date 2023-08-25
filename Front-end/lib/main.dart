@@ -3,12 +3,14 @@ import 'package:Kusrc_table/page/management_page.dart';
 import 'package:Kusrc_table/page/register_time_page.dart';
 import 'package:Kusrc_table/page/timetable_page.dart';
 import 'package:Kusrc_table/provider/navigation_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:Kusrc_table/firebase_options.dart';
 import 'package:Kusrc_table/data/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,14 +21,13 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await fetchData();
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   static final String title = 'Navigation Drawer';
-
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => NavigationProvider(),
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(primarySwatch: Colors.deepOrange),
           home: MainPage(),
         ),
-      );
+  );
 }
 
 class MainPage extends StatefulWidget {
@@ -51,8 +52,8 @@ class _MainPageState extends State<MainPage> {
   Widget buildPages() {
     final provider = Provider.of<NavigationProvider>(context);
     final navigationItem = provider.navigationItem;
-
-    switch (navigationItem) {
+    return Container(Container(child: Text(auth.currentUser)))
+    /*switch (navigationItem) {
       // case NavigationItem.header:
       //   return HeaderPage();
       case NavigationItem.management:
@@ -61,6 +62,6 @@ class _MainPageState extends State<MainPage> {
         return RegistertimePage();
       case NavigationItem.timetable:
         return TimetablePage();
-    }
+    }*/
   }
 }
